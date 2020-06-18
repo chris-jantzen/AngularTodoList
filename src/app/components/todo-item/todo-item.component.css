@@ -1,0 +1,53 @@
+:host {
+  width: 100%;
+}
+
+.is-complete {
+  text-decoration: line-through;
+}
+
+.todo {
+  /* width: calc(100% - 40px - 20px); */
+  height: 45px;
+  margin: 3px 0;
+  padding: 0 10px;
+  border-radius: 4px;
+}
+
+.todo:hover {
+  background-color: #f0f0f0;
+  cursor: pointer;
+}
+
+.flex {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+p {
+  font-size: 1.25rem;
+  color: #333;
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+}
+
+.iconContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: calc(4 * 1.5rem);
+}
+
+#info:hover path {
+  fill: #aaa !important;
+}
+
+#delete:hover path {
+  fill: #aa0000 !important;
+}
+
+#edit:hover path {
+  fill: #3b94b9 !important;
+}

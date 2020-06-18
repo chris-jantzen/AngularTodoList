@@ -1,0 +1,10 @@
+:host {
+  height: 100%;
+  min-width: 100%;
+}
+
+.todosContainer {
+  /* width: 100%; */
+  height: fit-content;
+  padding: 1.25rem;
+}
