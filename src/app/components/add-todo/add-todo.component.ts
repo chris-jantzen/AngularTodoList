@@ -22,7 +22,7 @@ export class AddTodoComponent {
 
     this.addTodo.emit(todo);
 
-    let input: HTMLInputElement = document.querySelector('#addTodo');
+    const input: HTMLInputElement = document.querySelector('#addTodo');
     input.value = '';
   }
 }

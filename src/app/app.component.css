@@ -11,22 +11,22 @@ main {
   height: 100%;
 }
 
-.title {
+.app-title {
   margin-top: 3rem;
 }
 
 h1, p {
   font-family: 'Roboto', sans-serif;
   color: #555;
+  font-weight: 300;
 }
 
-.title h1 {
+.app-title h1 {
   font-size: 4rem;
-  font-weight: 300;
   margin: 0;
 }
 
-.title p {
+.app-title p {
   margin: 0;
 }
 

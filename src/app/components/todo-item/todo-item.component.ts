@@ -11,8 +11,6 @@ export class TodoItemComponent {
   @Input() todo: Todo;
   @Output() deleteTodo: EventEmitter<Todo> = new EventEmitter();
 
-  todos: Todo[];
-
   constructor(private todoService: TodoService) {}
 
   setClasses = () => ({
@@ -39,7 +37,46 @@ export class TodoItemComponent {
   }
 
   onEdit() {
-    console.log('edit');
-    // TODO: Add an update request on the todoService
+    const oldTitle: string = JSON.parse(JSON.stringify(this.todo.title));
+    const currentTitle: HTMLParagraphElement = document.querySelector('.title>p');
+    const editTodo: HTMLDivElement = document.querySelector('.todo-edit-container');
+    const iconContainer: HTMLDivElement = document.querySelector('.iconContainer');
+    const editIconContainer: HTMLDivElement = document.querySelector('.editIconContainer');
+    const cancelIcon: Element = document.querySelector('#cancel');
+    cancelIcon.addEventListener('click', () => {
+      this.todo.title = oldTitle;
+      this.toggleHidden(editTodo, currentTitle, iconContainer, editIconContainer);
+    });
+    if (!currentTitle.classList.contains('hidden')) {
+      this.toggleHidden(editTodo, currentTitle, iconContainer, editIconContainer);
+    }
+  }
+  
+  editSubmit(e) {
+    console.log('submit');
+    e.preventDefault();
+    const currentTitle: HTMLParagraphElement = document.querySelector('.title>p');
+    const editTodo: HTMLDivElement = document.querySelector('.todo-edit-container');
+    const iconContainer: HTMLDivElement = document.querySelector('.iconContainer');
+    const editIconContainer: HTMLDivElement = document.querySelector('.editIconContainer');
+    const saveIconLabel: Element = document.querySelector('#saveEditIcon');
+    this.toggleHidden(editTodo, currentTitle, iconContainer, editIconContainer);
+    // saveIconLabel.addEventListener('click', () => {
+    //   console.log('click')
+    // });
+    this.todoService.updateTodo(this.todo).subscribe(() => {
+      console.log('todo update successful');
+      // const saveIconLabel: Element = document.querySelector('#saveEditIcon');
+      // saveIconLabel.addEventListener('click', () => {
+      //   console.log('click')
+      //   this.toggleHidden(editTodo, currentTitle, iconContainer, editIconContainer);
+      // });
+    }, err => {
+      console.error(err.message);
+    });
+  }
+
+  toggleHidden(...elements) {
+    elements.forEach(elem => elem.classList.toggle('hidden'));
   }
 }

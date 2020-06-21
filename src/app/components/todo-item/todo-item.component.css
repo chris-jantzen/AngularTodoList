@@ -37,7 +37,13 @@ p {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
   width: calc(4 * 1.5rem);
+}
+
+.editIconContainer {
+  width: calc(4 * 1.5rem);
+  justify-content: space-evenly;
 }
 
 #info:hover path {
@@ -50,4 +56,48 @@ p {
 
 #edit:hover path {
   fill: #3b94b9 !important;
+}
+
+.hidden {
+  display: none;
+}
+
+.editTitle {
+  line-height: 2em;
+  width: 200%;
+}
+
+#cancel {
+  fill: red;
+}
+
+#cancel:hover {
+  fill: #b40000;
+}
+
+#save {
+  fill: #2bd900;
+}
+
+#save:hover {
+  fill: #1e9400 !important;
+  cursor: pointer;
+}
+
+#saveEditIcon {
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+.todo-grid {
+  display: grid;
+  grid-template-columns: 8fr 1fr;
+  text-align: left;
+  height: 100%;
+}
+
+.title {
+  display: flex;
+  align-items: center;
 }
