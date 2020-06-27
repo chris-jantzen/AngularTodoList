@@ -1,11 +1,9 @@
 <form (submit)="editSubmit()" [ngClass]="setClasses()">
   <div class="todo-grid">
     <div (click)="onClick()" class="title">
-      <p >{{ todo.title }}</p>
+      <p>{{ todo.title }}</p>
       <div class="todo-edit-container hidden">
-        <!-- <form (submit)="editSubmit()"> -->
-          <input type="text" name="edit" [(ngModel)]="todo.title">
-        <!-- </form> -->
+          <input type="text" name="edit" id="editInputBox" [(ngModel)]="todo.title" />
       </div>
     </div>
     <div class="iconContainer">
@@ -23,7 +21,8 @@
       <svg id="cancel" xmlns="http://www.w3.org/2000/svg" viewBox="-2 -2 24 24" width="24" height="24" preserveAspectRatio="xMinYMin" class="jam jam-close-rectangle-f">
         <path d='M11.414 10l2.829-2.828a1 1 0 1 0-1.415-1.415L10 8.586 7.172 5.757a1 1 0 0 0-1.415 1.415L8.586 10l-2.829 2.828a1 1 0 0 0 1.415 1.415L10 11.414l2.828 2.829a1 1 0 0 0 1.415-1.415L11.414 10zM4 0h12a4 4 0 0 1 4 4v12a4 4 0 0 1-4 4H4a4 4 0 0 1-4-4V4a4 4 0 0 1 4-4z'></path>
       </svg>
-      <label id="saveEditIcon" for="edit">
+      <input type="submit" id="saveEditIcon" style="display: none;">
+      <label for="saveEditIcon">
         <svg id="save" width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
           <path d="M12 21.56L6.44001 16L4.55334 17.8867L12 25.3333L28 9.33334L26.1133 7.44667L12 21.56Z"></path>
         </svg>

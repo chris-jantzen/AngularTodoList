@@ -2,7 +2,7 @@
   width: 100%;
 }
 
-.is-complete {
+.isComplete {
   text-decoration: line-through;
 }
 
@@ -46,16 +46,25 @@ p {
   justify-content: space-evenly;
 }
 
+#editInputBox {
+  height: 35px;
+  width: 35vw;
+  font-size: 1.25rem;
+  border: 0;
+  border-radius: 5px;
+  padding-left: 5px;
+}
+
 #info:hover path {
-  fill: #aaa !important;
+  fill: #aaa;
 }
 
 #delete:hover path {
-  fill: #aa0000 !important;
+  fill: #aa0000;
 }
 
 #edit:hover path {
-  fill: #3b94b9 !important;
+  fill: #3b94b9;
 }
 
 .hidden {
