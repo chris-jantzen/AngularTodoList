@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { Todo } from '../../models/Todo';
 import { TodoServiceService as TodoService } from '../../services/todo-service.service';
+import { toggleHidden } from '../../utils/utils';
 
 @Component({
   selector: 'app-todo-item',
@@ -26,7 +27,7 @@ export class TodoItemComponent implements OnInit {
     'isComplete': this.todo.completed
   });
 
-  onClick() {
+  onMarkComplete() {
     this.todo.completed = !this.todo.completed;
     this.todoService.toggleCompleted(this.todo).subscribe((todo) => {}, (err) => {
       this.todo.completed = !this.todo.completed;
@@ -35,7 +36,8 @@ export class TodoItemComponent implements OnInit {
   }
 
   infoButtonOnClick() {
-    console.log('info');
+    console.log('info about:');
+    console.log(this.todo);
     // TODO: send to a new view for just this todo list item
   }
 
@@ -44,32 +46,29 @@ export class TodoItemComponent implements OnInit {
   }
 
   onEdit() {
-    const currentTitle: HTMLParagraphElement = document.querySelector('.title>p');
+    const currentTitle: HTMLParagraphElement = document.querySelector('#titleContainer>p');
+    const currentTitleContainer: HTMLDivElement = document.querySelector('#titleContainer');
     const editTodo: HTMLDivElement = document.querySelector('.todo-edit-container');
     const iconContainer: HTMLDivElement = document.querySelector('.iconContainer');
     const editIconContainer: HTMLDivElement = document.querySelector('.editIconContainer');
     if (!currentTitle.classList.contains('hidden')) {
-      this.toggleHidden(editTodo, currentTitle, iconContainer, editIconContainer);
+      toggleHidden(editTodo, currentTitle, currentTitleContainer, iconContainer, editIconContainer);
     }
   }
   
   editSubmit() {
-    const currentTitle: HTMLParagraphElement = document.querySelector('.title>p');
+    const currentTitle: HTMLParagraphElement = document.querySelector('#titleContainer>p');
+    const currentTitleContainer: HTMLDivElement = document.querySelector('#titleContainer');
     const editTodo: HTMLDivElement = document.querySelector('.todo-edit-container');
     const iconContainer: HTMLDivElement = document.querySelector('.iconContainer');
     const editIconContainer: HTMLDivElement = document.querySelector('.editIconContainer');
-    this.toggleHidden(editTodo, currentTitle, iconContainer, editIconContainer);
+    toggleHidden(editTodo, currentTitle, currentTitleContainer, iconContainer, editIconContainer);
     this.todoService.updateTodo(this.todo).subscribe(() => {
-      console.log('todo update successful');
       this.previousTodoData = this.todo;
     }, err => {
       console.error(err.message);
       this.todo = this.previousTodoData;
     });
-  }
-
-  toggleHidden(...elements) {
-    elements.forEach(elem => elem.classList.toggle('hidden'));
   }
 
   initCancelButton() {
@@ -81,7 +80,7 @@ export class TodoItemComponent implements OnInit {
     const oldTitle = this.previousTodoData.title;
     cancelIcon.addEventListener('click', () => {
       this.todo.title = oldTitle;
-      this.toggleHidden(editTodo, currentTitle, iconContainer, editIconContainer);
+      toggleHidden(editTodo, currentTitle, iconContainer, editIconContainer);
     });
   }
 }
