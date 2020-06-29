@@ -21,15 +21,17 @@ export class TodoItemComponent implements OnInit {
     this.initCancelButton();
   }
 
-  setClasses = () => ({
-    todo: true, // this means that there's a class called todo that will always be applied
-    flex: true,
-    'isComplete': this.todo.completed
-  });
+  setClasses() {
+    return {
+      todo: true, // this means that there's a class called todo that will always be applied
+      flex: true,
+      isComplete: this.todo.completed
+    };
+  }
 
   onMarkComplete() {
     this.todo.completed = !this.todo.completed;
-    this.todoService.toggleCompleted(this.todo).subscribe((todo) => {}, (err) => {
+    this.todoService.toggleCompleted(this.todo).subscribe(() => {}, (err) => {
       this.todo.completed = !this.todo.completed;
       console.error(err.message);
     });
@@ -55,7 +57,7 @@ export class TodoItemComponent implements OnInit {
       toggleHidden(editTodo, currentTitle, currentTitleContainer, iconContainer, editIconContainer);
     }
   }
-  
+
   editSubmit() {
     const currentTitle: HTMLParagraphElement = document.querySelector('#titleContainer>p');
     const currentTitleContainer: HTMLDivElement = document.querySelector('#titleContainer');
@@ -72,15 +74,16 @@ export class TodoItemComponent implements OnInit {
   }
 
   initCancelButton() {
-    const currentTitle: HTMLParagraphElement = document.querySelector('.title>p');
+    const currentTitle: HTMLParagraphElement = document.querySelector('.title p');
+    const currentTitleContainer: HTMLDivElement = document.querySelector('#titleContainer');
     const editTodo: HTMLDivElement = document.querySelector('.todo-edit-container');
     const iconContainer: HTMLDivElement = document.querySelector('.iconContainer');
     const editIconContainer: HTMLDivElement = document.querySelector('.editIconContainer');
     const cancelIcon: Element = document.querySelector('#cancel');
-    const oldTitle = this.previousTodoData.title;
+    const oldTitle: string = this.previousTodoData.title;
     cancelIcon.addEventListener('click', () => {
       this.todo.title = oldTitle;
-      toggleHidden(editTodo, currentTitle, iconContainer, editIconContainer);
+      toggleHidden(editTodo, currentTitle, currentTitleContainer, iconContainer, editIconContainer);
     });
   }
 }

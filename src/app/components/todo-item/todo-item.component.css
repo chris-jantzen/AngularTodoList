@@ -75,7 +75,11 @@ p {
   fill: #aa0000;
 }
 
-#edit:hover path {
+#edit {
+  cursor: pointer;
+}
+
+#edit>svg:hover path {
   fill: #3b94b9;
 }
 
