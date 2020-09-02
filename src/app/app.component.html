@@ -1,10 +1,12 @@
 <main>
   <div class="app-title">
     <h1>todo<span class="medium">list</span></h1>
-    <p>A simple todolist app built with Angular</p>
+    <p>A simple todo list app built with Angular</p>
   </div>
   <div id="taskContainer">
     <add-todo></add-todo>
   </div>
-  <app-todos-list></app-todos-list>
+  <div id="todos-container" style="margin: 0; padding: 0; box-sizing: border-box;">
+    <app-todos-list id="todos-list"></app-todos-list>
+  </div>
 </main>
