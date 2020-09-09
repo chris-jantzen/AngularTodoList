@@ -1,7 +1,6 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { Todo } from '../../models/Todo';
 import { TodoService } from '../../services/todo-service.service';
-import { toggleHidden } from '../../utils/utils';
 
 @Component({
   selector: 'app-todo-item',
