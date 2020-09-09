@@ -7,7 +7,6 @@
     <add-todo></add-todo>
   </div>
   <div id="todos-container" style="margin: 0; padding: 0; box-sizing: border-box;">
-    <!-- <app-todos-list id="todos-list"></app-todos-list> -->
     <div class="todosContainer">
       <app-todo-item
         *ngFor="let todo of todos$ | async"
@@ -16,11 +15,3 @@
     </div>
   </div>
 </main>
-
-
-<!-- <div class="todosContainer">
-  <app-todo-item
-    *ngFor="let todo of todos$ | async"
-    [todo]="todo"
-  ></app-todo-item>
-</div> -->
