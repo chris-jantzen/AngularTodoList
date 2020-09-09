@@ -10,15 +10,14 @@ import { toggleHidden } from '../../utils/utils';
 })
 export class TodoItemComponent implements OnInit {
   @Input() todo: Todo;
-  @Output() deleteTodo: EventEmitter<Todo> = new EventEmitter();
 
   previousTodoData: Todo;
+  activeEdit = false;
 
   constructor(private todoService: TodoService) {}
 
   ngOnInit(): void {
     this.previousTodoData = JSON.parse(JSON.stringify(this.todo));
-    this.initCancelButton();
   }
 
   setClasses() {
@@ -31,59 +30,44 @@ export class TodoItemComponent implements OnInit {
 
   onMarkComplete() {
     this.todo.completed = !this.todo.completed;
-    this.todoService.toggleCompleted(this.todo).subscribe(() => {}, (err) => {
+    this.todoService.toggleCompleted(this.todo);/* .subscribe(() => {}, (err) => {
       this.todo.completed = !this.todo.completed;
       console.error(err.message);
-    });
+    }); */
   }
 
   infoButtonOnClick() {
     console.log('info about:');
     console.log(this.todo);
     // TODO: send to a new view for just this todo list item
+    // remove this method and just give the button a routerLink
   }
 
   onDelete(todo: Todo) {
-    this.deleteTodo.emit(todo);
+    this.todoService.deleteTodo(todo);
   }
 
   onEdit() {
-    const currentTitle: HTMLParagraphElement = document.querySelector('#titleContainer>p');
-    const currentTitleContainer: HTMLDivElement = document.querySelector('#titleContainer');
-    const editTodo: HTMLDivElement = document.querySelector('.todo-edit-container');
-    const iconContainer: HTMLDivElement = document.querySelector('.iconContainer');
-    const editIconContainer: HTMLDivElement = document.querySelector('.editIconContainer');
-    if (!currentTitle.classList.contains('hidden')) {
-      toggleHidden(editTodo, currentTitle, currentTitleContainer, iconContainer, editIconContainer);
-    }
+    this.activeEdit = true;
   }
 
   editSubmit() {
-    const currentTitle: HTMLParagraphElement = document.querySelector('#titleContainer>p');
-    const currentTitleContainer: HTMLDivElement = document.querySelector('#titleContainer');
-    const editTodo: HTMLDivElement = document.querySelector('.todo-edit-container');
-    const iconContainer: HTMLDivElement = document.querySelector('.iconContainer');
-    const editIconContainer: HTMLDivElement = document.querySelector('.editIconContainer');
-    toggleHidden(editTodo, currentTitle, currentTitleContainer, iconContainer, editIconContainer);
-    this.todoService.updateTodo(this.todo).subscribe(() => {
-      this.previousTodoData = this.todo;
-    }, err => {
-      console.error(err.message);
-      this.todo = this.previousTodoData;
-    });
+    this.todoService.updateTodo(this.todo);
+    this.activeEdit = false;
   }
 
-  initCancelButton() {
-    const currentTitle: HTMLParagraphElement = document.querySelector('.title p');
-    const currentTitleContainer: HTMLDivElement = document.querySelector('#titleContainer');
-    const editTodo: HTMLDivElement = document.querySelector('.todo-edit-container');
-    const iconContainer: HTMLDivElement = document.querySelector('.iconContainer');
-    const editIconContainer: HTMLDivElement = document.querySelector('.editIconContainer');
-    const cancelIcon: Element = document.querySelector('#cancel');
-    const oldTitle: string = this.previousTodoData.title;
-    cancelIcon.addEventListener('click', () => {
-      this.todo.title = oldTitle;
-      toggleHidden(editTodo, currentTitle, currentTitleContainer, iconContainer, editIconContainer);
-    });
+  onCancel() {
+    this.todo.title = this.previousTodoData.title;
+    this.activeEdit = false;
   }
+
+  // private getElements() {
+  //   const todoId = this.todo.id;
+  //   const currentTitle: HTMLParagraphElement = document.querySelector(`#titleContainer${todoId}>p`);
+  //   const currentTitleContainer: HTMLDivElement = document.querySelector(`#titleContainer${todoId}`);
+  //   const editTodo: HTMLElement = document.getElementById(`editContainer${todoId}`);
+  //   const iconContainer: HTMLElement = document.getElementById(`iconContainer${todoId}`);
+  //   const editIconContainer: HTMLElement = document.getElementById(`iconContainer${todoId}`);
+  //   return { editTodo, currentTitle, currentTitleContainer, iconContainer, editIconContainer };
+  // }
 }

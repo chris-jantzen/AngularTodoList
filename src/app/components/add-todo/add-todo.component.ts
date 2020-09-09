@@ -1,4 +1,5 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component } from '@angular/core';
+import { TodoServiceService as TodoService } from '../../services/todo-service.service';
 import { Todo } from '../../models/Todo';
 import { v4 as uuid } from 'uuid';
 
@@ -8,10 +9,10 @@ import { v4 as uuid } from 'uuid';
   styleUrls: ['./add-todo.component.css']
 })
 export class AddTodoComponent {
-  @Output() addTodo: EventEmitter<any> = new EventEmitter();
+  // @Output() addTodo: EventEmitter<any> = new EventEmitter();
   title: string;
 
-  constructor() {}
+  constructor(private todoService: TodoService) {}
 
   onSubmit() {
     const todo: Todo = {
@@ -20,10 +21,9 @@ export class AddTodoComponent {
       completed: false
     };
 
-    this.addTodo.emit(todo);
+    this.todoService.addTodo(todo);
 
-    const input: HTMLInputElement = document.querySelector('#addTodo');
-    input.value = '';
+    this.title = '';
   }
 }
 // TODO: Make this work with the list
