@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
 import { Todo } from './models/Todo';
-import { TodoServiceService } from './services/todo-service.service';
 
 @Component({
   selector: 'app-root',
@@ -10,5 +9,5 @@ import { TodoServiceService } from './services/todo-service.service';
 export class AppComponent {
   @Input() todo: Todo;
 
-  constructor(private todoService: TodoServiceService) {}
+  constructor() {}
 }

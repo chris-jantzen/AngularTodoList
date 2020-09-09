@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { TodoServiceService as TodoService } from '../../services/todo-service.service';
+import { TodoService } from '../../services/todo-service.service';
 import { Todo } from '../../models/Todo';
 import { v4 as uuid } from 'uuid';
 
@@ -9,7 +9,6 @@ import { v4 as uuid } from 'uuid';
   styleUrls: ['./add-todo.component.css']
 })
 export class AddTodoComponent {
-  // @Output() addTodo: EventEmitter<any> = new EventEmitter();
   title: string;
 
   constructor(private todoService: TodoService) {}
@@ -26,4 +25,3 @@ export class AddTodoComponent {
     this.title = '';
   }
 }
-// TODO: Make this work with the list

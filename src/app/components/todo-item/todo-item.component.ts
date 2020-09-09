@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { Todo } from '../../models/Todo';
-import { TodoServiceService as TodoService } from '../../services/todo-service.service';
+import { TodoService } from '../../services/todo-service.service';
 import { toggleHidden } from '../../utils/utils';
 
 @Component({
@@ -30,10 +30,7 @@ export class TodoItemComponent implements OnInit {
 
   onMarkComplete() {
     this.todo.completed = !this.todo.completed;
-    this.todoService.toggleCompleted(this.todo);/* .subscribe(() => {}, (err) => {
-      this.todo.completed = !this.todo.completed;
-      console.error(err.message);
-    }); */
+    this.todoService.toggleCompleted(this.todo);
   }
 
   infoButtonOnClick() {
@@ -60,14 +57,4 @@ export class TodoItemComponent implements OnInit {
     this.todo.title = this.previousTodoData.title;
     this.activeEdit = false;
   }
-
-  // private getElements() {
-  //   const todoId = this.todo.id;
-  //   const currentTitle: HTMLParagraphElement = document.querySelector(`#titleContainer${todoId}>p`);
-  //   const currentTitleContainer: HTMLDivElement = document.querySelector(`#titleContainer${todoId}`);
-  //   const editTodo: HTMLElement = document.getElementById(`editContainer${todoId}`);
-  //   const iconContainer: HTMLElement = document.getElementById(`iconContainer${todoId}`);
-  //   const editIconContainer: HTMLElement = document.getElementById(`iconContainer${todoId}`);
-  //   return { editTodo, currentTitle, currentTitleContainer, iconContainer, editIconContainer };
-  // }
 }

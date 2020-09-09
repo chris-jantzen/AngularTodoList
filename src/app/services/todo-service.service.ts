@@ -2,12 +2,11 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { Todo } from '../models/Todo';
-import { element } from 'protractor';
 
 @Injectable({
   providedIn: 'root'
 })
-export class TodoServiceService {
+export class TodoService {
   limit: number = 5;
   todosUrl: string = "https://jsonplaceholder.typicode.com/todos";
   todosLimit: string = `?_limit=${this.limit}`;
