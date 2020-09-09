@@ -73,14 +73,15 @@ export class TodoService {
       () => {
         // send to error service or something to show an error component
         console.log('Can only edit json placeholder todos for now but we\'ve locally updated it for you in this session. Note: this change will not persist if the app is closed');
-      });
+      }
+    );
   }
 
   private updateInPlace(todo: Todo) {
     this.todosSubject.next(
-      this.todosSubject.value.map(item => {
+      this.todosSubject.value.map(item => (
         item.id === todo.id ? todo : item
-      })
+      ))
     );
   }
 }

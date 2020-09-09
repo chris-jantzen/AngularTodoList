@@ -15,6 +15,7 @@ export class AddTodoComponent {
 
   onSubmit() {
     const todo: Todo = {
+      userId: uuid(),
       id: uuid(),
       title: this.title,
       completed: false
