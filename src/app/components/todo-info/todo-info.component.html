@@ -1,0 +1,33 @@
+<div class="container" *ngIf="todo">
+  {{ todo | json }}
+  <div class="title flexRow">
+    <h1>{{ todo.title }}</h1>
+    <input type="checkbox" name="completed" id="complete" (change)="todo.completed = !todo.completed" [checked]="todo.completed">
+  </div>
+  <div class="date flexRow">
+    <p (mouseenter)="mouseEnter()" (mouseleave)="mouseExit()">Date</p>
+    <input [(ngModel)]="todo.date.year" type="number" name="year" id="year" min=2000 max=3000 placeholder="year">
+    <span>/</span>
+    <input [(ngModel)]="todo.date.month" type="number" name="month" id="month" max=12 min=1 placeholder="month">
+    <span>/</span>
+    <input [(ngModel)]="todo.date.day" type="number" name="day" id="day" max=31 min=1 placeholder="day">
+  </div>
+  <div *ngIf="mouseEntered" class="infoBox">
+    <p>Note: Using the correct format for date 😁</p>
+  </div>
+  <div class="time flexRow">
+    <p>Time</p>
+    <input [(ngModel)]="todo.time.hour" type="number" name="hour" id="hour" placeholder="hr" min=0 max=23>
+    <span>:</span>
+    <input [(ngModel)]="todo.time.minute" type="number" name="minute" id="minute" placeholder="min" min=00 max=59>
+  </div>
+  <div class="location flexRow">
+    <label for="location">Location</label>
+    <input [(ngModel)]="todo.location" type="text" name="location" id="location" placeholder="">
+  </div>
+  <label id="notesLabel" for="notes">Notes</label>
+  <textarea [(ngModel)]="todo.notes" id="notes" name="notes" placeholder="Notes For This Todo Item"></textarea>
+  <button (click)="goBack()">Back To List</button>
+</div>
+
+<!-- Sorry I didn't put very much effort into designing this one, just wanted to use the router -->
