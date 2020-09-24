@@ -5,7 +5,7 @@ import { TodoService } from '../../services/todo-service.service';
 @Component({
   selector: 'app-todo-item',
   templateUrl: './todo-item.component.html',
-  styleUrls: ['./todo-item.component.css']
+  styleUrls: ['./todo-item.component.css'],
 })
 export class TodoItemComponent implements OnInit {
   @Input() todo: Todo;
@@ -23,20 +23,13 @@ export class TodoItemComponent implements OnInit {
     return {
       todo: true, // this means that there's a class called todo that will always be applied
       flex: true,
-      isComplete: this.todo.completed
+      isComplete: this.todo.completed,
     };
   }
 
   onMarkComplete() {
     this.todo.completed = !this.todo.completed;
     this.todoService.toggleCompleted(this.todo);
-  }
-
-  infoButtonOnClick() {
-    console.log('info about:');
-    console.log(this.todo);
-    // TODO: send to a new view for just this todo list item
-    // remove this method and just give the button a routerLink
   }
 
   onDelete(todo: Todo) {
